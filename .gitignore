@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+build
+cmake_out
+
+# Project files
+*.sublime-project
+*.sublime-workspace
+.vs
