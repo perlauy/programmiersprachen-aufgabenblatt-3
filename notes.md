@@ -41,3 +41,15 @@ print(print_queue.front()); // returns the front element - job_1
 print_queue.pop(); // removes the front element from the queue - job_1
 
 ```
+
+## Augfabe 3.5
+????
+Although the declaration of matrikelnummern specifies a type map<string,int>, the assignment of values to the map uses char* for the key. For it to be a string literal, it should be written:
+```
+using namespace std::literals;
+//...
+matrikelnummern["Erika Mustermann"s] = 23523;
+```
+This way (array-like) can also lead to errors, since if a value which has not been assigned yet will not be recognized (it will insert 0 when called). It can also lead to overwritting already existing pairs.
+
+Using insert function will return pair<iterator,bool> depending of if its already there or not, preventing overwriting. Other methods (more efficient) would be `emplace` and `try_emplace`, or `insert_or_assign`.
