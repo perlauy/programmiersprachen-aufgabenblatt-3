@@ -1,13 +1,22 @@
 #include "circle.hpp"
 #include "rect.hpp"
 #include "window.hpp"
+
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
-#include <array>
+#include <set>
+#include <vector>
+#include <string>
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
+  std::cout << "Schreiben Sie den Namen eines der folgenden Kreise: " << std::endl;
+  std::cout << "Leonardo, Donatello, Rafael oder Michellangelo " << std::endl;
+  std::string picked_circle;
+  std::cin >> picked_circle;
+
   Window win{std::make_pair(800,800)};
 
   while (!win.should_close()) {
@@ -15,62 +24,30 @@ int main(int argc, char* argv[])
       win.close();
     }
 
-    bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
+//    bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
+    auto mouse_position = win.mouse_position();
 
     auto t = win.get_time();
 
-    float x1 = 400.f + 380.f * std::sin(t);
-    float y1 = 400.f + 380.f * std::cos(t);
-
-    float x2 = 400.f + 380.f * std::sin(2.0f*t);
-    float y2 = 400.f + 380.f * std::cos(2.0f*t);
-
-    float x3 = 400.f + 380.f * std::sin(t-10.f);
-    float y3 = 400.f + 380.f * std::cos(t-10.f);
-
-    win.draw_point(x1, y1, 1.0f, 0.0f, 0.0f);
-    win.draw_point(x2, y2, 0.0f, 1.0f, 0.0f);
-    win.draw_point(x3, y3, 0.0f, 0.0f, 1.0f);
-
-    auto mouse_position = win.mouse_position();
-    if (left_pressed) {
-      win.draw_line(30.0f, 30.0f, // FROM pixel idx with coords (x=30, y=30)
-                    mouse_position.first, mouse_position.second, // TO mouse position in pixel coords
-                    1.0,0.0,0.0, // color with r,g,b in [0.0, 1.0]
-                    1.0);        // line thickness = 1.0 * default thickness
-    }
-
-    win.draw_line(0, mouse_position.second, 10, mouse_position.second, 0.0, 0.0, 0.0);
-    win.draw_line(win.window_size().second - 10, mouse_position.second, win.window_size().second, mouse_position.second, 0.0, 0.0, 0.0);
-
-    win.draw_line(mouse_position.first, 0, mouse_position.first, 10, 0.0, 0.0, 0.0);
-    win.draw_line(mouse_position.first, win.window_size().second - 10, mouse_position.first, win.window_size().second, 0.0, 0.0, 0.0);
-
-    std::string display_text = "mouse position: (" + std::to_string(mouse_position.first) + ", " + std::to_string(mouse_position.second) + ")";
-    
     int text_offset_x = 10;
     int text_offset_y = 5;
     unsigned int font_size = 35;
     
-    win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
+    //win.draw_text(text_offset_x, text_offset_y, font_size, "display_text");
 
-    Circle c_1{{400.f, 400.f}, 100.f, {0.f,0.5f,1.0f}, {0.f,1.f,1.0f}};
-    Circle c_2{{120.f, 600.f}, 50.f, {0.2f,0.6f,0.6f}, {1.f,1.f,1.f}};
-    std::array<Circle, 2> array_circles = {c_1, c_2};
+    Circle c_1{{200.f, 200.f}, 75.f, {1.f,0.f,0.0f}, {1.f,1.f,1.f}, "Rafael"};
+    Circle c_2{{200.f, 600.f}, 70.f, {0.f,0.5f,0.8f}, {1.f,1.f,1.f}, "Leonardo"};
+    Circle c_3{{600.f, 200.f}, 65.f, {0.2f,0.f,0.6f}, {1.f,1.f,1.f}, "Donatello"};
+    Circle c_4{{600.f, 600.f}, 80.f, {1.f,0.6f,0.f}, {1.f,1.f,1.f}, "Michellangelo"};
+    std::set<Circle> set_circles{c_1, c_2, c_3, c_4};
 
-    for (auto const& c : array_circles) { 
-      bool highlight_c = c.is_inside({(float)mouse_position.first, (float)mouse_position.second});
-      c.draw(win, 36, 2.f, highlight_c);
-    }
+    auto draw_circle = [&win, &picked_circle] (Circle const& c) {
+      bool highlight = c.get_name() == picked_circle;
+      c.draw(win, 36, 2.f, highlight);
+    };
+    std::for_each(set_circles.begin(), set_circles.end(), draw_circle);
 
-    Rect r_1{{50.f, 50.f}, {200.f,100.f}, {1.f,0.2f,0.f}};
-    Rect r_2{{200.f, 100.f}, {600.f,320.f}, {1.f,1.f,0.f}};
-    std::array<Rect, 2> array_rect = {r_1, r_2};
-
-    for (auto const& r : array_rect) { 
-      bool highlight_r = r.is_inside({(float)mouse_position.first, (float)mouse_position.second});
-      r.draw(win, 2.f + (2.f * highlight_r));
-    }
+    if (t >= 10 && picked_circle != "") picked_circle = "";
 
     win.update();
   }

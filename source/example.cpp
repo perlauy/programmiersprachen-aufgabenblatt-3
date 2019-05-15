@@ -54,8 +54,8 @@ int main(int argc, char* argv[])
     
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
 
-    Circle c_1{{400.f, 400.f}, 100.f, {0.f,0.5f,1.0f}, {0.f,1.f,1.0f}};
-    Circle c_2{{120.f, 600.f}, 50.f, {0.2f,0.6f,0.6f}, {1.f,1.f,1.f}};
+    Circle c_1{{400.f, 400.f}, 100.f, {0.f,0.5f,1.0f}, {0.f,1.f,1.0f}, "Bananin"};
+    Circle c_2{{120.f, 600.f}, 50.f, {0.2f,0.6f,0.6f}, {1.f,1.f,1.f}, "Bananon"};
     std::array<Circle, 2> array_circles = {c_1, c_2};
 
     for (auto const& c : array_circles) { 

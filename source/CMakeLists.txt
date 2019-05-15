@@ -17,7 +17,7 @@ add_executable(aufgabe_4
   mat2.cpp
   circle.cpp
   rect.cpp
-  example.cpp
+  aufgabe_4.cpp
   )
 
 target_link_libraries(aufgabe_4

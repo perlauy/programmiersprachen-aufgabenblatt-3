@@ -13,9 +13,9 @@ int main (int argc , char * argv [])
 
   // Store each present value once (duplicates not allowed)
   std::set<unsigned int> int_set;
-  for (auto i = int_list.begin(); i != int_list.end(); ++i) {
+  for (auto i : int_set) {
     // Since key and value in a set are the same, and the keys may not be repeated, values that occur multiple times in int_list will only be saved once in int_set.
-    int_set.insert(*i); 
+    int_set.insert(i); 
   }
   std::cout << "There are " << int_set.size() << " different values in the list." << std::endl;
 
@@ -31,8 +31,8 @@ int main (int argc , char * argv [])
   // A fixed sized array could also been used, but here we don't need to allocate memory for int that don't occur. We only save those in an int that exist.
   
   std::map<unsigned int, int> int_occurrences;
-  for (auto i = int_list.begin(); i != int_list.end(); ++i) {
-    auto int_iterator = int_occurrences.find(*i);
+  for (auto i : int_list) {
+    auto int_iterator = int_occurrences.find(i);
 
     // If the int is already in the map, take the times its there, else it is present until here 0 times.
     auto int_times = int_iterator != int_occurrences.end() ?
@@ -40,7 +40,7 @@ int main (int argc , char * argv [])
       : 0;
 
     // If its there, change it, else, insert it 
-    int_occurrences.insert_or_assign(*i, ++int_times); 
+    int_occurrences.insert_or_assign(i, ++int_times); 
   }
 
 
