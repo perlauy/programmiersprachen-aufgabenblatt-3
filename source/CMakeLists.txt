@@ -17,10 +17,29 @@ add_executable(aufgabe_4
   mat2.cpp
   circle.cpp
   rect.cpp
+  circledrawer.hpp
   aufgabe_4.cpp
   )
 
+# Build aufgabe_6
+add_executable(aufgabe_6
+  window.cpp
+  glew.c
+  vec2.cpp
+  mat2.cpp
+  circle.cpp
+  aufgabe_6.cpp
+  )
+
 target_link_libraries(aufgabe_4
+  glfw
+  ${GLFW_LIBRARIES}
+  nanovg
+  ${OPENGL_LIBRARIES}
+  )
+add_dependencies(aufgabe_4 glfw nanovg ${COPY_BINARY})
+
+target_link_libraries(aufgabe_6
   glfw
   ${GLFW_LIBRARIES}
   nanovg

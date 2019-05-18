@@ -14,6 +14,7 @@ class Circle {
               Circle(Circle const& c);
               Circle(Vec2 const& center, float radius, Color const& color, Color const& highlight_color, std::string name);
   
+  
     double    circumference() const;
     void      draw(Window const& window, unsigned int facets, bool highlight = false) const;
     void      draw(Window const& window, unsigned int facets, float weight, bool highlight = false) const;

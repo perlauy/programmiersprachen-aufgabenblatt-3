@@ -1,6 +1,7 @@
 #include "circle.hpp"
 #include "rect.hpp"
 #include "window.hpp"
+#include "circledrawer.hpp"
 
 #include <GLFW/glfw3.h>
 #include <utility>
@@ -10,8 +11,15 @@
 #include <string>
 #include <iostream>
 
+struct compare_circles_by_name {
+  bool operator() (Circle const& lhs, Circle const& rhs) const {
+    return lhs.get_name() < rhs.get_name();
+  }
+};
+
 int main(int argc, char* argv[])
 {
+  
   std::cout << "Schreiben Sie den Namen eines der folgenden Kreise: " << std::endl;
   std::cout << "Leonardo, Donatello, Rafael oder Michellangelo " << std::endl;
   std::string picked_circle;
@@ -24,7 +32,6 @@ int main(int argc, char* argv[])
       win.close();
     }
 
-//    bool left_pressed = win.get_mouse_button(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
     auto mouse_position = win.mouse_position();
 
     auto t = win.get_time();
@@ -39,13 +46,10 @@ int main(int argc, char* argv[])
     Circle c_2{{200.f, 600.f}, 70.f, {0.f,0.5f,0.8f}, {1.f,1.f,1.f}, "Leonardo"};
     Circle c_3{{600.f, 200.f}, 65.f, {0.2f,0.f,0.6f}, {1.f,1.f,1.f}, "Donatello"};
     Circle c_4{{600.f, 600.f}, 80.f, {1.f,0.6f,0.f}, {1.f,1.f,1.f}, "Michellangelo"};
-    std::set<Circle> set_circles{c_1, c_2, c_3, c_4};
+    std::set<Circle, compare_circles_by_name> set_circles{c_1, c_2, c_3, c_4};
 
-    auto draw_circle = [&win, &picked_circle] (Circle const& c) {
-      bool highlight = c.get_name() == picked_circle;
-      c.draw(win, 36, 2.f, highlight);
-    };
-    std::for_each(set_circles.begin(), set_circles.end(), draw_circle);
+
+  std::for_each(set_circles.begin(), set_circles.end(), CircleDrawer{picked_circle, win});
 
     if (t >= 10 && picked_circle != "") picked_circle = "";
 

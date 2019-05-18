@@ -13,7 +13,8 @@ Circle::Circle() :
   center_{0.f, 0.f},
   radius_{1.f},
   color_{0.5f,0.5f,0.5f},
-  highlight_color_{1.f,1.f,0.f}
+  highlight_color_{1.f,1.f,0.f},
+  name_{"A circle has no name"}
 {}
 
 Circle::Circle(Circle const& c) :
