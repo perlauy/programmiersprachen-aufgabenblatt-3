@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
     std::set<Circle, compare_circles_by_name> set_circles{c_1, c_2, c_3, c_4};
 
 
-  std::for_each(set_circles.begin(), set_circles.end(), CircleDrawer{picked_circle, win});
+    std::for_each(set_circles.begin(), set_circles.end(), CircleDrawer{picked_circle, win});
 
     if (t >= 10 && picked_circle != "") picked_circle = "";
 

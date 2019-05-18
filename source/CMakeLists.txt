@@ -31,6 +31,16 @@ add_executable(aufgabe_6
   aufgabe_6.cpp
   )
 
+# Build aufgabe_7
+add_executable(aufgabe_7
+  window.cpp
+  glew.c
+  vec2.cpp
+  mat2.cpp
+  circle.cpp
+  aufgabe_7.cpp
+  )
+
 target_link_libraries(aufgabe_4
   glfw
   ${GLFW_LIBRARIES}
@@ -47,6 +57,13 @@ target_link_libraries(aufgabe_6
   )
 add_dependencies(aufgabe_4 glfw nanovg ${COPY_BINARY})
 
+target_link_libraries(aufgabe_7
+  glfw
+  ${GLFW_LIBRARIES}
+  nanovg
+  ${OPENGL_LIBRARIES}
+  )
+add_dependencies(aufgabe_4 glfw nanovg ${COPY_BINARY})
 # Build example
 add_executable(example
   window.cpp

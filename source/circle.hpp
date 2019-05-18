@@ -32,5 +32,6 @@ class Circle {
 
 bool operator==(Circle const& c1, Circle const& c2);
 bool operator<(Circle const& c1, Circle const& c2);
+bool operator>(Circle const& c1, Circle const& c2);
 
 #endif
