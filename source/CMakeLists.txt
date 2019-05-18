@@ -99,3 +99,14 @@ target_link_libraries(aufgabe_8
   nanovg
   ${OPENGL_LIBRARIES}
   ) 
+
+
+# Build aufgabe_9
+add_executable(aufgabe_9
+  aufgabe_9.cpp
+  )
+  
+# Build aufgabe_11
+add_executable(aufgabe_11
+  aufgabe_11.cpp
+  )

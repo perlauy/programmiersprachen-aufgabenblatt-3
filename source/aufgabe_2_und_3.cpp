@@ -1,8 +1,10 @@
 #include <list>
 #include <set>
 #include <map>
+#include <vector>
 #include <cmath>
 #include <iostream>
+# include <iterator> // std :: ostream_iterator <>
 
 int main (int argc , char * argv [])
 {
@@ -51,6 +53,16 @@ int main (int argc , char * argv [])
     std::cout << i << " : " << times << std::endl;
   }
 
+  // 3.10
+  std::vector<unsigned int> copied_vector(int_list.size());
+  std::copy(int_list.begin(), int_list.end(), copied_vector.begin());
+
+  std::cout << "-----------------" << std::endl;
+  
+  for (auto el : copied_vector) {
+     std::cout << el << " \t" << int_list.front() << std::endl;
+     int_list.pop_front();
+  }
 
   return 0;
 }
