@@ -105,8 +105,12 @@ target_link_libraries(aufgabe_8
 add_executable(aufgabe_9
   aufgabe_9.cpp
   )
-  
+
 # Build aufgabe_11
 add_executable(aufgabe_11
   aufgabe_11.cpp
+  )
+# Build aufgabe_12
+add_executable(aufgabe_12
+  aufgabe_12.cpp
   )
