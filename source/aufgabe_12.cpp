@@ -20,6 +20,7 @@ TEST_CASE (" all sums are 10 ", "[ sum ]")
   for (int i = 0; i < v_3.size(); ++i) {
     v_3[i] = v_1.at(i) + v_2.at(i);
   }
+  std::transform(v_1.begin(), v_1.end(), v_2.begin(), std::back_inserter(v_3), [](int a, int b) -> int { return a + b; });
 
   REQUIRE(std::all_of(v_3.begin(), v_3.end(), is_10));
 }

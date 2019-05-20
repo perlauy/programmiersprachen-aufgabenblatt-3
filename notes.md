@@ -13,10 +13,12 @@
 
 
 **Speichern der Punkte eines Polygons**
-Secuential container -> The points will probably need to be visited sequentially. A vector would allow to increase the number of points, is efficient with LIFO-Semantik. Also a list could be used (efficiency?)
+Secuential container -> The points will probably need to be visited sequentially. A vector would allow to increase the number of points, is efficient with LIFO-Semantik.
+Also a list could be used. If points are going to change (insert in the middle of the container, e.g.) a list could be more efficient. Random access will probably not be needed. 
 ```
 // Point is a struct with int x, y;
 vector<Point> polygon;
+list<Point> polygon_list;
 ```
 **Zuordnung von Farbnamen und entsprechenden RGB-Werten**
 Since there is a name and a type (a struct for color) pair, a map could be used. Each name is also unique.

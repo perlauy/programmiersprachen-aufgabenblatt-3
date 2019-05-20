@@ -22,7 +22,8 @@ int main(int argc, char* argv[]) {
   sorted_circles = std::vector<Circle>{c_1, c_2, c_3, c_4};
 
   std::sort(sorted_circles.begin(), sorted_circles.end());
-  //REQUIRE (std::is_sorted ( sorted_circles.begin(), sorted_circles.end ()));
+  
+  
   return Catch::Session().run(argc, argv);
 
 }

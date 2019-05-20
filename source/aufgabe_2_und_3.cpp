@@ -8,14 +8,15 @@
 
 int main (int argc , char * argv [])
 {
-  std::list<unsigned int> int_list = {};
+  std::list<unsigned int> int_list{};
   for (int i = 0; i < 100; ++i) {
+    //rand() between 0 and RAND_MAX 32767 
     int_list.push_back(rand() % 100);
   }
 
   // Store each present value once (duplicates not allowed)
   std::set<unsigned int> int_set;
-  for (auto i : int_set) {
+  for (auto i : int_list) {
     // Since key and value in a set are the same, and the keys may not be repeated, values that occur multiple times in int_list will only be saved once in int_set.
     int_set.insert(i); 
   }
@@ -47,10 +48,8 @@ int main (int argc , char * argv [])
 
 
   for (int i = 0; i < 100; ++i) {
-    auto int_iterator = int_occurrences.find(i);
-    auto times = int_iterator != int_occurrences.end() ? int_iterator->second : 0;
-
-    std::cout << i << " : " << times << std::endl;
+    // using array style []: if the key is not there, it will write the key and assign value 0
+    std::cout << i << " : " << int_occurrences[i] << std::endl;
   }
 
   // 3.10

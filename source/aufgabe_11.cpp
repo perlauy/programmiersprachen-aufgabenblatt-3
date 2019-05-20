@@ -12,7 +12,7 @@ bool is_multiple_of_3(unsigned int num) {
 TEST_CASE (" filter alle vielfache von drei ", "[ erase ]")
 {
 
-  std::vector<unsigned int> int_vector = {};
+  std::vector<unsigned int> int_vector{};
   for (int i = 0; i < 100; ++i) {
     int_vector.push_back(rand() % 100);
   }

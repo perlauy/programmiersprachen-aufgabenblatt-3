@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 
   std::sort(sorted_circles.begin(), sorted_circles.end(), 
     [](Circle const& lhs, Circle const& rhs) -> bool {
-      return (lhs.get_radius() <= rhs.get_radius());
+      return (lhs.get_radius() < rhs.get_radius());
     });
 
   return Catch::Session().run(argc, argv);
